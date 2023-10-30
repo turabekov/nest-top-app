@@ -19,7 +19,6 @@ const getMongoString = (configService: ConfigService): string => {
 		configService.get('MONGO_PORT') +
 		'/' +
 		configService.get('MONGO_AUTH_DB')
-	console.log(str)
 
 	return str;
 }
