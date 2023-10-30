@@ -9,7 +9,7 @@ export const getMongoConfig = async (configService: ConfigService): Promise<Mong
 };
 
 const getMongoString = (configService: ConfigService): string => {
-	return 'mongodb://' +
+	const str: string = 'mongodb://' +
 		configService.get('MONGO_LOGIN') +
 		':' +
 		configService.get('MONGO_PASSWORD') +
@@ -18,11 +18,14 @@ const getMongoString = (configService: ConfigService): string => {
 		':' +
 		configService.get('MONGO_PORT') +
 		'/' +
-		configService.get('MONGO_AUTHDATABASE');
+		configService.get('MONGO_AUTH_DB')
+	console.log(str)
+
+	return str;
 }
 
 const getMongoOptions = () => ({
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	autoIndex: true
+	// useNewUrlParser: true,
+	// useUnifiedTopology: true,
+	// autoIndex: true
 });
