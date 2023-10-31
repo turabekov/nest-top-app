@@ -2,8 +2,6 @@ import { Type } from 'class-transformer';
 import { IsArray, IsNumber, IsString, ValidateNested, IsOptional, IsEnum } from 'class-validator';
 import { TopLevelCategory } from '../models/top-page.model';
 
-
-
 export class HhDataDto {
 	@IsNumber()
 	count: number;

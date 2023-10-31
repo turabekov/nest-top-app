@@ -19,6 +19,10 @@ export class TopPageService {
 		return this.topPageModel.findById(id).exec()
 	}
 
+	async findByAlias(alias: string) {
+		return this.topPageModel.findOne({ alias }).exec()
+	}
+
 	async deleteById(id: string) {
 		return this.topPageModel.findByIdAndDelete(id).exec()
 	}
@@ -30,7 +34,7 @@ export class TopPageService {
 	async find(dto: FindTopPageDto) {
 		console.log("service ")
 		console.log(dto.firstLevelCategory)
-		return await this.topPageModel.find({ firstLevelCategory: 0 })
+		return await this.topPageModel.find({ firstLevelCategory: dto.firstLevelCategory }).exec()
 	}
 
 }
