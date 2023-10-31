@@ -3,6 +3,7 @@ import { TopPageController } from './top-page.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TopPage, TopPageSchema } from './models/top-page.model';
+import { TopPageService } from './top-page.service';
 
 @Module({
 	controllers: [TopPageController],
@@ -12,5 +13,6 @@ import { TopPage, TopPageSchema } from './models/top-page.model';
 			{ name: TopPage.name, schema: TopPageSchema },
 		])
 	],
+	providers: [TopPageService],
 })
 export class TopPageModule { }
