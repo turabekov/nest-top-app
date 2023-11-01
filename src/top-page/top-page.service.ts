@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { TopPage, TopPageDocument } from './models/top-page.model';
+import { TopLevelCategory, TopPage, TopPageDocument } from './models/top-page.model';
 import { Model } from 'mongoose';
 import { CreateTopPageDto } from './dto/create-toppage.dto';
 import { FindTopPageDto } from './dto/find-top-page.dto';
@@ -12,6 +12,7 @@ export class TopPageService {
 	) { }
 
 	async create(dto: CreateTopPageDto) {
+		console.log("create", dto)
 		return this.topPageModel.create(dto);
 	}
 
@@ -31,10 +32,8 @@ export class TopPageService {
 		return this.topPageModel.findByIdAndUpdate(id, dto, { new: true })
 	}
 
-	async find(dto: FindTopPageDto) {
-		console.log("service ")
-		console.log(dto.firstLevelCategory)
-		return await this.topPageModel.find({ firstLevelCategory: dto.firstLevelCategory }).exec()
+	async findByCategory(firstLevelCategory: TopLevelCategory) {
+		return await this.topPageModel.find({ firstLevelCategory }, { alias: 1, secondCategory: 1, title: 1 }).exec()
 	}
 
 }
