@@ -33,7 +33,30 @@ export class TopPageService {
 	}
 
 	async findByCategory(firstLevelCategory: TopLevelCategory) {
-		return await this.topPageModel.find({ firstLevelCategory }, { alias: 1, secondCategory: 1, title: 1 }).exec()
+		return await this.topPageModel.aggregate([
+			{
+				$match: {
+					firstLevelCategory
+				}
+			},
+			{
+				$group: {
+					_id: { secondCategory: '$secondCategory' },
+					pages: {
+						$push: { alias: '$alias', title: '$title' }
+					}
+				}
+			}
+		]).exec()
+	}
+
+	async findByText(text: string) {
+		return await this.topPageModel.find({
+			$text: {
+				$search: text,
+				$caseSensitive: false
+			}
+		}).exec()
 	}
 
 }

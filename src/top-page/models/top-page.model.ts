@@ -32,6 +32,7 @@ export class Advantage {
 	description: string;
 }
 
+
 @Schema({ timestamps: true })
 export class TopPage {
 
@@ -44,7 +45,7 @@ export class TopPage {
 	@Prop({ unique: true })
 	alias: string;
 
-	@Prop()
+	@Prop({ index: 'text' })
 	title: string;
 
 	@Prop()
@@ -57,7 +58,7 @@ export class TopPage {
 	@Prop({ type: () => [Advantage] })
 	advantages: Advantage[];
 
-	@Prop()
+	@Prop({ index: 'text' })
 	seoText: string;
 
 	@Prop()
